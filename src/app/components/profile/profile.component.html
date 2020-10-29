@@ -1,0 +1,183 @@
+<!-- <div *ngIf="isloading" class="loading col-12 text-white d-flex justify-content-center align-items-center">
+  <i class="fas fa-spinner fa-pulse fa-3x"></i>
+</div> -->
+
+<section>
+  <div class="container">
+
+        <div class="pt-2 mb-0  d-flex flex-row-reverse">
+             <button class="add-node-btn font-weight-bolder"
+                     data-toggle="modal" data-target="#addNote">
+                     <i class="fas fa-plus"></i></button>
+             <!-- <button class="btn btn-info" data-toggle="modal" data-target="#addNote">Add Note</button> -->
+        </div>
+
+        <div *ngIf="isloading" class="loading col-12 text-center text-white mb-3">
+             <i class="fas fa-spinner fa-pulse fa-3x"></i>
+        </div>
+
+        <div *ngIf="!existNotes">
+              <div class="alert alert-danger w-75 m-auto text-center font-weight-bold">
+                  {{message}}
+              </div>
+        </div>
+
+        <div class="row notes" *ngIf="existNotes">
+             <div  *ngFor="let note of userNotes" class="col-xl-3 col-lg-4 col-md-4 col-sm-6 my-3">
+                   <div class="note">
+
+                      <div class="noteHeader d-flex justify-content-between p-2 px-3">
+                            <a  class="" data-toggle="modal" data-target="#editNote"
+                                (click)="preEditNote(note)">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                            <a  class="" data-toggle="modal" data-target="#deleteNote"
+                                (click)="preDeleteNote(note)">
+                                <i class="fas fa-times"></i>
+                            </a>
+                      </div>
+
+                      <hr class="m-0">
+
+                      <div  class="content bg-striped-black">
+                              <h3 class="text-center pt-2">{{note.title}}</h3>
+                              <textarea class="px-3" readonly>{{note.desc}}</textarea>
+                      </div>
+
+                   </div>
+             </div>
+        </div>
+
+  </div>
+</section>
+
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++ Modals ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<!--Add Note Modal -->
+<div class="modal fade" id="addNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form [formGroup]="addNoteForm" (ngSubmit)="addNoteForm.valid&&addNote()">
+
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add new note</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-3">
+                    <div class="form-group">
+                      <input formControlName="title" type="text" class="form-control" placeholder="Title"
+                       [class.is-valid]="addNoteForm.get('title').valid&&addNoteForm.get('title').touched"
+                       [class.is-invalid]="addNoteForm.get('title').invalid&&addNoteForm.get('title').touched"
+                      >
+                    </div>
+
+                    <div class="mb-3">
+                      <textarea formControlName="desc" class="form-control"  rows="10"
+                                placeholder="Type your note"></textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                 <button type="submit" class="btn btn-info px-5"
+                         [class.dottedLoading]="buttonIsClicked"
+                         [disabled]="addNoteForm.invalid"
+                 >Add</button>
+                 <button type="button" class="btn btn-danger px-3" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+
+
+
+<!-- Edit Note Modal -->
+<div class="modal fade" id="editNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form [formGroup]="editNoteForm" (ngSubmit)="editNoteForm.valid&&editNote()">
+
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit note</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-3">
+                    <div class="form-group">
+                      <input formControlName="title" type="text" class="form-control" placeholder="Title"
+                      [class.is-valid]="editNoteForm.get('title').valid&&editNoteForm.get('title').touched"
+                      [class.is-invalid]="editNoteForm.get('title').invalid&&editNoteForm.get('title').touched"
+                      >
+                    </div>
+
+                    <div class="mb-3">
+                      <textarea formControlName="desc" class="form-control"  rows="10"
+                                placeholder="Type your note"></textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-info px-5"
+                                    [class.dottedLoading]="buttonIsClicked"
+                                    [disabled]="editNoteForm.invalid"
+                                    >Update</button>
+              <button type="button" class="btn btn-danger px-3" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+
+<!-- Delete Note Modal -->
+<div class="modal fade" id="deleteNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form [formGroup]="deleteNoteForm" (ngSubmit)="deleteNote()">
+
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete note</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-3 text-center font-weight-bold">
+                  <p>Do you really want to <span class="text-danger font-weight-bolder">delete</span> this note ?<br> process cannot be undone</p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger px-5"
+                      [class.dottedLoading]="buttonIsClicked">Delete</button>
+              <button type="button" class="btn btn-info px-3" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+
+<!-- toast offline -->
+
+<div id="toastoffline" class="toast" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true"
+     style="position: fixed; top: 68px; left: 10px;">
+     <div class="toast-header p-2">
+      <span class="fa-stack fa-1x mr-2">
+        <i class="fas fa-wifi fa-stack-1x" style="color: #D9DCE1;"></i>
+        <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
+      </span>
+      <strong class="mr-auto">You are currently offline. <br>Check your internet connecction and <span class="text-success">try again.</span></strong>
+
+      <button type="button" class="ml-4 mr-2  mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+</div>

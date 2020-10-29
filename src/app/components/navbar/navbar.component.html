@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbg-blue fixed-top">
+  <div class="container">
+
+      <a href="#" class="navbar-brand fa-lg font-weight-bolder">
+         <i class="far fa-sticky-note fa-lg mr-2"></i>Notes</a>
+
+
+      <div  class="ml-auto" *ngIf="_AuthenticationService.islogin()==false">
+            <a class="btn btn-warning btn-sm btn-default" role="button"
+               routerLink="/signin">Sign In
+               <i class="fas fa-sign-in-alt ml-2"></i>
+            </a>
+
+            <a class="btn btn-success btn-sm ml-4 btn-default" role="button"
+               routerLink="/signup">Sign Up
+               <i class="fas fa-user-plus ml-2"></i>
+            </a>
+            <!-- <a class="btn btn-outline-warning btn-sm btn-default" role="button"
+               data-toggle="tooltip" data-placement="bottom" title="Sign In"
+               routerLink="/signin">
+               <i class="fas fa-sign-in-alt"></i>
+            </a>
+
+            <a class="btn btn-outline-success btn-sm ml-4 btn-default" role="button"
+               data-toggle="tooltip" data-placement="bottom" title="Sign Up"
+               routerLink="/signup">
+               <i class="fas fa-user-plus"></i>
+            </a> -->
+      </div>
+
+
+      <div class="ml-auto " *ngIf="_AuthenticationService.islogin()==true">
+        <a class="btn btn-danger btn-sm ml-4 btn-default" role="button"
+           (click)="_AuthenticationService.logOut()">Log Out
+           <i class="fas fa-sign-out-alt ml-2"></i>
+        </a>
+        <!-- <a class="btn btn-outline-danger btn-sm ml-4 btn-default" role="button"
+           data-toggle="tooltip" data-placement="bottom" title="Log Out"
+           (click)="_AuthenticationService.logOut()">
+           <i class="fas fa-sign-out-alt"></i>
+        </a> -->
+       </div>
+
+
+
+
+
+      <!-- <div  class="collapse navbar-collapse" id="navbarSupportedContent"
+            *ngIf="_AuthenticationService.islogin()==false">
+
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <i class="fas fa-sign-in-alt mr-1"></i>Sign In
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <a class="dropdown-item" routerLinkActive="active" routerLink="/signin">Sign In
+                        <span class="float-right"><i class="fas fa-sign-in-alt"></i></span></a>
+
+                     <div class="dropdown-divider"></div>
+
+                     <a class="dropdown-item" routerLinkActive="active" routerLink="/signup">Sign Up
+                        <span class="float-right"><i class="fas fa-user-plus"></i></span></a>
+                </div>
+
+              </li>
+            </ul>
+      </div> -->
+
+
+      <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"
+           *ngIf="_AuthenticationService.islogin()==true">
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+
+                      <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-sign-out-alt mr-1"></i>Log Out
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" (click)="_AuthenticationService.logOut()">Log Out
+                              <span class="float-right"><i class="fas fa-sign-out-alt"></i></span>
+                          </a>
+                      </div>
+
+                    </li>
+                </ul>
+
+      </div> -->
+
+  </div>
+</nav>

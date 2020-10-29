@@ -1,0 +1,119 @@
+<section class="d-flex flex-column">
+          <div class="text-center">
+                <div class="container">
+                      <h2 class="font-weight-bolder mt-lg-5 mt-4 mb-lg-5 mb-4">Sticky Notes Web App</h2>
+                </div>
+          </div>
+
+          <div class="flex-grow-1 pb-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                          <p class="text-muted pl-2 lead mb-xl-3 mb-2">Let's <span class="font-weight-bold text-dark">signin</span> to write your notes.</p>
+                              <form class="bg-white p-3 m-auto"
+                                    [formGroup]='signInForm' (ngSubmit)="signInForm.valid&&signInFormSubmit()">
+
+                                    <div class="form-group w-100">
+                                      <input  type="email" class="form-control form-control" placeholder="Email address"
+                                              formControlName="email"
+                                              [class.is-valid]="signInForm.get('email').valid && signInForm.get('email').touched"
+                                              [class.is-invalid]="signInForm.get('email').invalid && signInForm.get('email').touched">
+                                              <div class="alert alert-danger"
+                                                  *ngIf="signInForm.get('email').invalid && signInForm.get('email').touched">
+                                                  Email is invalid
+                                              </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                      <input type="password" class="form-control form-control" placeholder="Password"
+                                              formControlName="password"
+                                              [class.is-valid]="signInForm.get('password').valid && signInForm.get('password').touched"
+                                              [class.is-invalid]="signInForm.get('password').invalid && signInForm.get('password').touched">
+                                              <div class="alert alert-danger"
+                                                  *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched">
+                                                   Password is invalid.
+                                              </div>
+                                              <!-- <div class="alert alert-secondary">
+                                                Password is required and must have minimum eight characters:
+                                                <ul class="mb-0">
+                                                    <li>at least one uppercase and lower letters.</li>
+                                                    <li>at least one number and least one special character.</li>
+                                                </ul>
+                                                EX: Amr@3221
+                                              </div> -->
+
+                                              <div class="accordion" id="accordionExample">
+                                                <div class="card">
+                                                    <div class="card-header" id="headingOne">
+                                                      <h6 class="mb-0">
+                                                        <a class="btn btn-link btn-block text-left" type="button"
+                                                                data-toggle="collapse" data-target="#collapseOne"
+                                                                aria-expanded="true" aria-controls="collapseOne">
+                                                                Password description
+                                                        </a>
+                                                      </h6>
+                                                    </div>
+
+                                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                                            data-parent="#accordionExample">
+                                                      <div class="card-body">
+                                                        It must have minimum eight characters:
+                                                        <ul class="mb-0">
+                                                            <li>at least one uppercase and lower letters.</li>
+                                                            <li>at least one number and least one special character.</li>
+                                                        </ul>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-block"
+                                            [disabled]="signInForm.invalid">
+                                            <span [class.dottedLoading]="buttonIsClicked">Log In</span>
+                                            <!-- <span *ngIf="!buttonIsClicked">Log In</span>
+                                            <span *ngIf="buttonIsClicked">Watting...</span> -->
+                                    </button>
+
+                                    <div class="alert text-center font-weight-bolder fa-lg mt-3 p-3"
+                                            *ngIf='resMessage'
+                                            [class.alert-danger]='resMessage !== "success"'
+                                            [class.alert-success]='resMessage === "success"'>{{resMessage}}
+                                    </div>
+
+                                    <hr class="my-3">
+
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-success rounded-lg">
+                                              <a class="d-inline-block w-100  px-3 text-white text-decoration-none font-weight-bold"
+                                                routerLink="/signup" role="button" aria-pressed="true">Create New Account</a>
+                                        </button>
+                                    </div>
+
+                              </form>
+                        </div>
+                    </div>
+                </div>
+          </div>
+</section>
+
+
+
+
+
+<div id="toastoffline" class="toast" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true"
+     style="position: fixed; top: 68px; left: 10px;">
+     <div class="toast-header p-2">
+      <span class="fa-stack fa-1x mr-2">
+        <i class="fas fa-wifi fa-stack-1x" style="color: #D9DCE1;"></i>
+        <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
+      </span>
+      <strong class="mr-auto">You are currently offline. <br>Check your internet connecction and <span class="text-success">try again.</span></strong>
+
+      <button type="button" class="ml-4 mr-2  mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+</div>

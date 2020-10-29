@@ -1,0 +1,193 @@
+<section class="d-flex flex-column">
+    <div>
+         <div class="container">
+              <h2 class="text-center font-weight-bolder mt-lg-5 mt-4 mb-4 mb-lg-5">Sticky Notes Web App</h2>
+         </div>
+    </div>
+
+    <div class="flex-grow-1 pb-3">
+         <div class="container">
+                <p class="text-muted pl-2 lead mb-xl-3 mb-2">Let's <span class="font-weight-bold text-dark">signup</span> to create your notes board.</p>
+                <div class="row">
+                        <div class="col-lg-5 text-lg-left text-center">
+                            <div class="d-lg-block  d-none ">
+                              <img class="w-100 h-100 img-thumbnail"
+                                  src="../../../assets/signup/signup.gif" alt="Signup Image">
+                            </div>
+                        </div>
+
+                        <div class="offset-lg-1 col-lg-6">
+                             <form class="bg-white p-3 m-auto"
+                                   [formGroup]="signUpForm" (ngSubmit)="signUpForm.valid&&signUpFormSubmit()">
+
+                                  <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <input  type="text" class="form-control form-control" placeholder="First name"
+                                                  formControlName="first_name"
+                                                  [class.is-invalid]="signUpForm.get('first_name').invalid==true &&
+                                                                      signUpForm.get('first_name').touched==true"
+                                                  [class.is-valid]="signUpForm.get('first_name').valid==true &&
+                                                                    signUpForm.get('first_name').touched==true">
+                                            <div class="alert alert-danger"
+                                                *ngIf="signUpForm.get('first_name').invalid==true
+                                                    && signUpForm.get('first_name').touched==true">
+                                                  First name is invalid
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                          <input type="text" class="form-control form-control" placeholder="Last name"
+                                                formControlName="last_name"
+                                                [class.is-invalid]="signUpForm.controls.last_name.invalid==true &&
+                                                                    signUpForm.controls.last_name.touched==true"
+                                                [class.is-valid]="signUpForm.controls.last_name.valid==true &&
+                                                                  signUpForm.controls.last_name.touched==true">
+                                            <div class="alert alert-danger"
+                                                *ngIf="signUpForm.controls.last_name.invalid==true &&
+                                                        signUpForm.controls.last_name.touched==true">
+                                                  Last name is invalid
+                                            </div>
+                                        </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <input type="number" class="form-control form-control" placeholder="Age"
+                                          formControlName="age"
+                                          [class.is-invalid]="signUpForm.controls.age.invalid==true &&
+                                                              signUpForm.controls.age.touched==true"
+                                                [class.is-valid]="signUpForm.controls.age.valid==true &&
+                                                                  signUpForm.controls.age.touched==true">
+                                            <div class="alert alert-danger"
+                                                *ngIf="signUpForm.controls.age.invalid==true &&
+                                                        signUpForm.controls.age.touched==true">
+                                                  Age is invalid
+                                            </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <input type="email" class="form-control form-control" placeholder="Email address"
+                                          formControlName="email"
+                                          [class.is-invalid]="signUpForm.controls.email.invalid==true &&
+                                                              signUpForm.controls.email.touched==true"
+                                          [class.is-valid]="signUpForm.controls.email.valid==true &&
+                                                            signUpForm.controls.email.touched==true">
+                                            <div class="alert alert-danger"
+                                                *ngIf="signUpForm.controls.email.invalid==true &&
+                                                        signUpForm.controls.email.touched==true">
+                                                  Email is invalid
+                                            </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <input type="password" class="form-control form-control" formControlName="password"
+                                              placeholder="Password"
+                                              [class.is-invalid]="signUpForm.controls.password.invalid==true &&
+                                                                  signUpForm.controls.password.touched==true"
+                                              [class.is-valid]="signUpForm.controls.password.valid==true &&
+                                                                signUpForm.controls.password.touched==true">
+
+                                              <div class="alert alert-danger"
+                                                    *ngIf="signUpForm.controls.password.invalid==true  &&
+                                                          signUpForm.controls.password.touched==true">
+                                                          Password is invalid.
+                                              </div>
+
+                                              <!-- <div class="alert alert-secondary">
+                                                Password is required and must have minimum eight characters:
+                                                <ul class="mb-0">
+                                                    <li>at least one uppercase and lower letters.</li>
+                                                    <li>at least one number and least one special character.</li>
+                                                </ul>
+                                                EX: Amr@3221
+                                              </div> -->
+
+                                              <div class="accordion" id="accordionExample">
+                                                <div class="card">
+                                                    <div class="card-header" id="headingOne">
+                                                      <h6 class="mb-0">
+                                                        <a class="btn btn-link btn-block text-left" type="button"
+                                                                data-toggle="collapse" data-target="#collapseOne"
+                                                                aria-expanded="true" aria-controls="collapseOne">
+                                                                Password description
+                                                        </a>
+                                                      </h6>
+                                                    </div>
+
+                                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                                            data-parent="#accordionExample">
+                                                      <div class="card-body">
+                                                        It must have minimum eight characters:
+                                                        <ul class="mb-0">
+                                                            <li>at least one uppercase and lower letters.</li>
+                                                            <li>at least one number and least one special character.</li>
+                                                        </ul>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                  </div>
+
+                                  <button type="submit" class="btn btn-primary btn-block btn"
+                                          [disabled]="signUpForm.invalid">
+                                          <span [class.dottedLoading]="buttonIsClicked">Sign Up</span>
+                                          <!-- <span *ngIf="!buttonIsClicked">Sign Up</span>
+                                          <span *ngIf="buttonIsClicked">Watting...</span> -->
+                                  </button>
+
+
+                                  <div class="alert text-center font-weight-bolder fa-lg mt-3 p-3"
+                                      *ngIf='resMessage !== "success"'
+                                      [class.alert-danger]='resMessage !== "success"'>{{resMessage}}
+                                  </div>
+
+                                  <!-- <div class="alert text-center font-weight-bolder fa-lg mt-3 p-3"
+                                      *ngIf='resMessage'
+                                      [class.alert-danger]='resMessage !== "success"'
+                                      [class.alert-success]='resMessage === "success"'>{{resMessage}}
+                                  </div> -->
+                             </form>
+                        </div>
+               </div>
+         </div>
+    </div>
+</section>
+
+
+
+<!-- toast in case success signup-->
+<div id="toastsignUp" class="toast" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true"
+     style="position: fixed; top: 68px; left: 10px;">
+<div class="toast-header p-2">
+  <div>
+    <i class="far fa-check-circle fa-5x mr-2 text-success"></i>
+  </div>
+
+  <div>
+    <h3><strong class="mr-auto">Sign UP Success!</strong></h3>
+    <p class="mb-1">Now you will redirect to signin page to login.</p>
+  </div>
+
+  <button type="button" class="ml-4 mr-2  mb-1 close" data-dismiss="toast" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+</div>
+
+
+
+<!-- toast in case connection lost -->
+<div id="toastoffline" class="toast" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true"
+     style="position: fixed; top: 68px; left: 10px;">
+     <div class="toast-header p-2">
+      <span class="fa-stack fa-1x mr-2">
+        <i class="fas fa-wifi fa-stack-1x" style="color: #D9DCE1;"></i>
+        <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
+      </span>
+      <strong class="mr-auto">You are currently offline. <br>Check your internet connecction and <span class="text-success">try again.</span></strong>
+
+      <button type="button" class="ml-4 mr-2  mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+</div>
