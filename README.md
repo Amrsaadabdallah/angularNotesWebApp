@@ -1,10 +1,9 @@
-# NotesApp
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
-
-## This is a website after Hosting on netlify. 
+# This is a website after Hosting on netlify. 
 https://angularnoteswebapp.netlify.app/
 
+## NotesApp
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
 
 ## Development server
 
