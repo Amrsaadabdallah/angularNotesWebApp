@@ -1,6 +1,11 @@
 # This is a website after Hosting on netlify. 
 https://angularnoteswebapp.netlify.app/
 
+
+# This is a website after Hosting on heroku. 
+https://angular-notes-web-app.herokuapp.com/
+
+
 ## NotesApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
